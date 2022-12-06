@@ -9,6 +9,7 @@
     <body>
         <h1>○○市観光SNS</h1>
         <hr>
+        <a href='/posts/create'>create</a>
         <div class='posts'>
               @foreach ($posts as $post)
             <div class='post'>

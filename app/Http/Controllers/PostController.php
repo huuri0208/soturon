@@ -27,4 +27,3 @@ public function store(Post $post, PostRequest $request)
 }
 }
 
-

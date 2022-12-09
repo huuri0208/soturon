@@ -10,6 +10,8 @@
         <h1>○○市観光SNS</h1>
         <hr>
         <br>
+        
+       
         <a href='/posts/create'>投稿する</a>
         <div class='posts'>
           @foreach ($posts as $post)
@@ -21,7 +23,7 @@
              <h2 class='title'>{{ $post->title}}</h2> 
              <h3 class=tag>
                  @foreach($post->tags as $tag)
-                 <a href="/tags/{{ $tag->id }}">{{$tag->title}}</a>
+                {{$tag->title}}
                  @endforeach
                  </h3>
              <p class='body'>{{$post->body}}</p>

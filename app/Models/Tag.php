@@ -20,5 +20,8 @@ class Tag extends Model
     
     return $this->belongsToMany(Post::class);
 }
-
+public function getByTag(int $limit_count = 5)
+{
+     return $this->posts()->with('tags')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+}
 }

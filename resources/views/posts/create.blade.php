@@ -10,6 +10,19 @@
         
         <form action="/posts" method="POST">
             @csrf
+            <div>
+        <h2>タグ</h2>
+        @foreach($tags as $tag)
+
+            <label>
+                
+                <input type="checkbox" value="{{ $tag->id }}" name="tags_array[]">
+                    {{$tag->title}}
+                </input>
+            </label>
+            
+        @endforeach         
+    </div>
             <div class="title">
                 <h2>タイトル</h2>
                 <input type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>

@@ -21,6 +21,8 @@ class PostController extends Controller
 }
 
 
+
+
 public function store(Request $request, Post $post)
 {
     $input_post = $request['post'];

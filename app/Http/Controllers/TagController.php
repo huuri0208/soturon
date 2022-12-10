@@ -11,7 +11,10 @@ class TagController extends Controller
     
 public function index(Tag $tag)
 {
-    return view('tags.index')->with(['posts' => $tag->getByTag()]);
+    return view('tags.index')->with([
+        'posts' => $tag->getByTag(),
+        'tag_title'=> $tag->title,
+        'tag_body'=>$tag->body]);
 }
 
 

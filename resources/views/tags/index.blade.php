@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('○○市観光SNS') }}
+        </h2>
+    </x-slot>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -7,11 +13,12 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1>○○市観光SNS</h1>
+       
         <hr>
         <br>
         
-       
+         <h2>{{$tag_title}}</h2>
+         <h3>{{$tag_body}}</h3>
         <a href='/posts/create'>投稿する</a>
         <div class='posts'>
           @foreach ($posts as $post)
@@ -59,4 +66,5 @@
         </div>
         
     </body>
+    </x-app-layout>
 </html>

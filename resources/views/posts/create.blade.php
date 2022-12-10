@@ -1,11 +1,18 @@
 <!DOCTYPE HTML>
+
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('○○市観光SNS') }}
+        </h2>
+    </x-slot>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <title>○○市観光SNSサイト</title>
     </head>
     <body>
-         <h1>○○市観光SNS</h1>
+        
         <hr>
         
         <form action="/posts" method="POST">
@@ -39,4 +46,5 @@
             <a href="/">戻る</a>
         </div>
     </body>
+      </x-app-layout>
 </html>

@@ -13,7 +13,7 @@
     </head>
     <body>
         
-        <hr>
+         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         
         <form action="/posts" method="POST">
             @csrf
@@ -45,6 +45,8 @@
         <div class="footer">
             <a href="/">戻る</a>
         </div>
+        
+    </div>
     </body>
       </x-app-layout>
 </html>

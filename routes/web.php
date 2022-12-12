@@ -16,9 +16,6 @@ use App\Http\Controllers\TagController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,11 +29,14 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/', [PostController::class, 'index'])->name('index');
-Route::get('/tags/{tag}',  [TagController::class, 'index']);
+
 
 Route::group(['middleware' => ['auth']], function(){
+Route::get('/', [PostController::class, 'index'])->name('index');
+Route::get('/tags/{tag}',  [TagController::class, 'index']);
 Route::get('/posts/create',  [PostController::class, 'create']);
 Route::post('/posts',  [PostController::class, 'store']);
 Route::post('/comments',  [CommentController::class, 'store']);
+Route::get('/post/like/{id}',  [PostController::class, 'like'])->name('post.like');
+Route::get('/post/unlike/{id}',  [PostController::class, 'unlike'])->name('post.unlike');
 });

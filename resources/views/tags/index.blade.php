@@ -14,12 +14,14 @@
     </head>
     <body>
        
-        <hr>
-        <br>
+         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         
          <h2>{{$tag_title}}</h2>
          <h3>{{$tag_body}}</h3>
-        <a href='/posts/create'>投稿する</a>
+        <a href='/posts/create'>投稿する</a>　
+        <div class="footer">
+            <a href="/">戻る</a>
+        </div>
         <div class='posts'>
           @foreach ($posts as $post)
           <hr>
@@ -34,6 +36,14 @@
                  @endforeach
                  </h3>
              <p class='body'>{{$post->body}}</p>
+             
+              <div>
+  @if($post->is_liked_by_auth_user())
+    <a href="{{ route('post.unlike', ['id' => $post->id]) }}" class="btn btn-success btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
+  @else
+    <a href="{{ route('post.like', ['id' => $post->id]) }}" class="btn btn-secondary btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
+  @endif
+</div>
           </div>
             
             
@@ -64,6 +74,7 @@
          <div class='paginate'>
             {{ $posts->links() }}
         </div>
+    </div>
         
     </body>
     </x-app-layout>

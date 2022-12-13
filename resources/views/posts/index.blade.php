@@ -41,12 +41,20 @@
     <a href="{{ route('post.like', ['id' => $post->id]) }}" class="btn btn-secondary btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
   @endif
 </div>
+
+<div>
+  @if($post->is_referenced_by_auth_user())
+    <a href="{{ route('post.unreference', ['id' => $post->id]) }}" class="btn btn-success btn-sm">参考になった！<span class="badge">{{ $post->references->count() }}</span></a>
+  @else
+    <a href="{{ route('post.reference', ['id' => $post->id]) }}" class="btn btn-secondary btn-sm">参考になった！<span class="badge">{{ $post->references->count() }}</span></a>
+  @endif
+</div>
           </div>
             
            
           
           <details>
-            <summary>コメント</summary>  
+            <summary>コメント<span class="badge">{{ $post->comments->count() }}</span></summary>  
              <form action="/comments" method="POST">
                @csrf
                <div class='comment_create'>

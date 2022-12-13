@@ -39,4 +39,6 @@ Route::post('/posts',  [PostController::class, 'store']);
 Route::post('/comments',  [CommentController::class, 'store']);
 Route::get('/post/like/{id}',  [PostController::class, 'like'])->name('post.like');
 Route::get('/post/unlike/{id}',  [PostController::class, 'unlike'])->name('post.unlike');
+Route::get('/post/reference/{id}',  [PostController::class, 'reference'])->name('post.reference');
+Route::get('/post/unreference/{id}',  [PostController::class, 'unreference'])->name('post.unreference');
 });

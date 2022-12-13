@@ -31,6 +31,8 @@ class Post extends Model
     return $this->belongsToMany(Tag::class);
 }
 
+
+//いいね
  public function likes()
   {
     return $this->hasMany(Like::class, 'post_id');
@@ -46,6 +48,29 @@ class Post extends Model
     }
 
     if (in_array($id, $likers)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  
+  //参考
+    public function references()
+  {
+    return $this->hasMany(Reference::class, 'post_id');
+  }
+  
+   public function is_referenced_by_auth_user()
+  {
+    $id = Auth::id();
+
+    $referencers = array();
+    foreach($this->references as $reference) {
+      array_push($referencers, $reference->user_id);
+    }
+
+    if (in_array($id, $referencers)) {
       return true;
     } else {
       return false;

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('○○市観光SNS') }}
-        </h2>
+        
     </x-slot>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -18,7 +16,9 @@
         
          <h2>{{$tag_title}}</h2>
          <h3>{{$tag_body}}</h3>
-        <a href='/posts/create'>投稿する</a>　
+        <a href='/posts/create'>投稿する</a>
+        <br>
+        <a href='/tags/{{$tag_id}}'>最新順</a>   <a href='/tags/{{$tag_id}}/likepage'>いいね順</a>　　<a href='/tags/{{$tag_id}}/referencepage'>参考順</a>
         <div class="footer">
             <a href="/">戻る</a>
         </div>
@@ -27,7 +27,7 @@
           <hr>
           <div class='post'>
 
-             <p class="created_at">{{$post->created_at}} </p>
+             <p class="created_at">{{$post->created_at}} </p> <p>{{ $post->user->name }}</p>
              
              <h2 class='title'>{{ $post->title}}</h2> 
              <h3 class=tag>
@@ -36,6 +36,13 @@
                  @endforeach
                  </h3>
              <p class='body'>{{$post->body}}</p>
+              @foreach ($post->images as $image)
+                 <input type="hidden" name="image[post_id]" value={{$post->id}}>
+                 
+                 <img src="{{$image->image_path}}">
+             
+                 
+              @endforeach
              
               <div>
   @if($post->is_liked_by_auth_user())
@@ -52,6 +59,15 @@
     <a href="{{ route('post.reference', ['id' => $post->id]) }}" class="btn btn-secondary btn-sm">参考になった！<span class="badge">{{ $post->references->count() }}</span></a>
   @endif
 </div>
+
+
+ @if($post->user->id == Auth::user()->id )
+             <form action="/posts/{{$post->id}}" id="form_{{ $post->id }}" method="post">
+                       @csrf
+                       @method('DELETE')
+                       <button type="submit" onclick="deletePost({{ $post->id }})" >削除</button>
+                   </form>
+            @endif
           </div>
             
             
@@ -83,7 +99,17 @@
             {{ $posts->links() }}
         </div>
     </div>
-        
+    
+     <script>
+       
+        function deletePost(id) {
+        'use strict'
+
+        if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+            document.getElementById(`form_${id}`).submit();
+        }
+    }
+   </script>
     </body>
     </x-app-layout>
 </html>

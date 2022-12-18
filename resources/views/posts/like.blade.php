@@ -17,14 +17,14 @@
        
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {{ Auth::user()->name }}
-        <a href='/posts/create'>投稿する</a>    
+        <a href='/posts/create'>投稿する</a> 
         <br>
         <a href='/'>最新順</a> <a href='/posts/likepage'>いいね順</a> <a href='/posts/referencepage'>参考順</a>
           @foreach ($posts as $post)
           <hr>
           <div class='bg-white px-8'>
 
-             <p class="mb-2 text-xs">{{$post->created_at}} </p> <p>{{ $post->user->name }}</p>
+             <p class="mb-2 text-xs">{{$post->created_at}} </p><p>{{ $post->user->name }}</p>
              
              <h2 class="mb-2 text-xl font-bold">{{ $post->title}}</h2> 
              <h3 class="mb-2 text-xl">
@@ -59,14 +59,18 @@
 
 
          
-            @if($post->user->id == Auth::user()->id )
+              @if($post->user->id == Auth::user()->id )
              <form action="/posts/{{$post->id}}" id="form_{{ $post->id }}" method="post">
                        @csrf
                        @method('DELETE')
                        <button type="submit" onclick="deletePost({{ $post->id }})" >削除</button>
                    </form>
+                   
             @endif
            </div>
+           
+           
+           
           <details>
             <summary>コメント<span class="badge">{{ $post->comments->count() }}</span></summary>  
              <form action="/comments" method="POST">

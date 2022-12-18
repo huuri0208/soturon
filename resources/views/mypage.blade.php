@@ -16,8 +16,8 @@
         <br>
        
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            {{ Auth::user()->name }}
-        <a href='/posts/create'>投稿する</a>    
+            <p class"mb-2 text-xl font-bold">{{ Auth::user()->name }}</p>
+        <a href='/posts/create'>投稿するよ</a>    
         <br>
         <a href='/'>最新順</a> <a href='/posts/likepage'>いいね順</a> <a href='/posts/referencepage'>参考順</a>
           @foreach ($posts as $post)

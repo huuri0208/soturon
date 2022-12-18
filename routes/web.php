@@ -33,12 +33,20 @@ require __DIR__.'/auth.php';
 
 Route::group(['middleware' => ['auth']], function(){
 Route::get('/', [PostController::class, 'index'])->name('index');
+Route::get('/mypage', [PostController::class, 'mypage'])->name('mypage');
 Route::get('/tags/{tag}',  [TagController::class, 'index']);
 Route::get('/posts/create',  [PostController::class, 'create']);
+Route::get('/posts/likepage',  [PostController::class, 'likepage']);
+Route::get('/posts/referencepage',  [PostController::class, 'referencepage']);
+Route::get('/tags/{tag}/likepage',  [TagController::class, 'likepage']);
+Route::get('/tags/{tag}/referencepage',  [TagController::class, 'referencepage']);
 Route::post('/posts',  [PostController::class, 'store']);
+Route::delete('/posts/{post}', [PostController::class,'delete']);
 Route::post('/comments',  [CommentController::class, 'store']);
 Route::get('/post/like/{id}',  [PostController::class, 'like'])->name('post.like');
 Route::get('/post/unlike/{id}',  [PostController::class, 'unlike'])->name('post.unlike');
 Route::get('/post/reference/{id}',  [PostController::class, 'reference'])->name('post.reference');
 Route::get('/post/unreference/{id}',  [PostController::class, 'unreference'])->name('post.unreference');
+
+
 });

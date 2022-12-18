@@ -2,9 +2,7 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('○○市観光SNS') }}
-        </h2>
+       
     </x-slot>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -15,7 +13,7 @@
         
          <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         
-        <form action="/posts" method="POST">
+        <form action="/posts" method="POST"  enctype="multipart/form-data">
             @csrf
             <div>
         <h2>タグ</h2>
@@ -40,13 +38,16 @@
                 <textarea name="post[body]" placeholder="○○楽しかった！！">{{ old('post.body') }}</textarea>
              <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
             </div>
+            
+              <input type="file"  name="image[0]" id="image"/>
+               <input type="file"  name="image[1]" id="image" />
+               
+               
             <input type="submit" value="保存"/>
         </form>
         <div class="footer">
             <a href="/">戻る</a>
         </div>
-        
-    </div>
     </body>
       </x-app-layout>
 </html>

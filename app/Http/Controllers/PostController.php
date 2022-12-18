@@ -8,13 +8,42 @@ use App\Http\Requests\PostRequest;
 use App\Models\Tag;
 use App\Models\Like;
 use App\Models\Reference;
+use App\Models\Image;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
+use Cloudinary;
+
 
 class PostController extends Controller
 {
     public function index(Post $post)
     {
+      $images = Image::all();
         return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);  
+       //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
+    }
+    
+    
+     public function mypage(Post $post)
+    {
+      
+        return view('/mypage')->with(['posts' => $post->getmypage()]);  
+       //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
+    }
+    
+     public function likepage(Post $post)
+    {
+    
+        return view('posts/like')->with(['posts' => $post->getlike()]);  
+       //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
+    }
+    
+    
+     public function referencepage(Post $post)
+    {
+    
+        return view('posts/like')->with(['posts' => $post->getreference()]);  
        //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
     }
     
@@ -24,18 +53,50 @@ class PostController extends Controller
 }
 
 
-
-
-public function store(Request $request, Post $post)
+public function delete(Post $post)
 {
+    $post->delete();
+    return redirect('/');
+}
+
+public function store(Request $request, Post $post )
+{
+  
+  DB::beginTransaction();
+  
+  try{
+     $user_id = Auth::id();   
     $input_post = $request['post'];
-    $input_tags = $request->tags_array;  
-    
-   
+     $input_post += ['user_id' => $request->user()->id];
     $post->fill($input_post)->save();
-    
- 
+    $input_tags = $request->tags_array; 
     $post->tags()->attach($input_tags); 
+    
+    
+    $images = $request->file('image');
+    
+    if($images !=null){
+    foreach($images as $image){
+       
+            $data =[
+                'image_path' => Cloudinary::upload($image->getRealPath())->getSecurePath(),
+                'post_id' => $post->id
+                ];
+                
+                  $image = Image::insert($data);   
+        
+    }
+    
+    }
+}catch(Exception $e){
+    DB::rollback();
+    return back()->withInput();
+}
+DB::commit();
+    
+  
+
+   
     return redirect('/');
 }
 
@@ -120,5 +181,8 @@ public function store(Request $request, Post $post)
 
     return redirect()->back();
   }
+  
+  
+  
 }
 

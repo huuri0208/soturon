@@ -25,17 +25,10 @@ class PostController extends Controller
     }
     
     
-     public function mypage(Post $post)
-    {
-      
-        return view('/mypage')->with(['posts' => $post->getmypage()]);  
-       //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
-    }
-    
      public function likepage(Post $post)
     {
     
-        return view('posts/like')->with(['posts' => $post->getlike()]);  
+        return view('posts/index')->with(['posts' => $post->getlike()]);  
        //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
     }
     
@@ -43,7 +36,7 @@ class PostController extends Controller
      public function referencepage(Post $post)
     {
     
-        return view('posts/like')->with(['posts' => $post->getreference()]);  
+        return view('posts/index')->with(['posts' => $post->getreference()]);  
        //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
     }
     
@@ -183,6 +176,14 @@ DB::commit();
   }
   
   
+   public function search(Request $request)
+    {
+         $search = '%' . addcslashes($request->search, '%_\\') . '%';
+        $posts = Post::where('body', 'LIKE', $search)->orderBy('created_at', 'desc')->Paginate(5);
+
+        
+        return view('posts/search', compact('posts'));
+    }
   
 }
 

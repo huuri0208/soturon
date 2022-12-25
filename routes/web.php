@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,8 +35,9 @@ require __DIR__.'/auth.php';
 
 Route::group(['middleware' => ['auth']], function(){
 Route::get('/', [PostController::class, 'index'])->name('index');
-Route::get('/mypage', [PostController::class, 'mypage'])->name('mypage');
+Route::get('/User/mypage', [UserController::class, 'mypage'])->name('mypage');
 Route::get('/tags/{tag}',  [TagController::class, 'index']);
+Route::post('/search', [PostController::class, 'search']);
 Route::get('/posts/create',  [PostController::class, 'create']);
 Route::get('/posts/likepage',  [PostController::class, 'likepage']);
 Route::get('/posts/referencepage',  [PostController::class, 'referencepage']);
@@ -47,6 +50,7 @@ Route::get('/post/like/{id}',  [PostController::class, 'like'])->name('post.like
 Route::get('/post/unlike/{id}',  [PostController::class, 'unlike'])->name('post.unlike');
 Route::get('/post/reference/{id}',  [PostController::class, 'reference'])->name('post.reference');
 Route::get('/post/unreference/{id}',  [PostController::class, 'unreference'])->name('post.unreference');
+Route::get('/User/{user}', [UserController::class,'show']);
 
 
 });

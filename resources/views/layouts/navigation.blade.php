@@ -13,8 +13,8 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                         ○○市観光SNS
+                    <h2 class="inline-flex items-center  text-xl font-medium ">
+                         稲沢市観光SNS
       　　　　　　　　　  </h2>
                    
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
@@ -24,6 +24,15 @@
                      <x-nav-link :href="route('mypage')" :active="request()->routeIs('mypage')">
                       マイページ
                     </x-nav-link>
+                    
+                    <div class="inline-flex items-center">
+                    <form action="/search" method="POST"   >
+                         @csrf
+                          <input type="text" name="search"  required/>
+                          <input class="ml-2 px-2 py-1 rounded bg-gray-500 text-white font-bold" type="submit" value="検索">
+                          </form>
+                          
+                    </div>
                 </div>
             </div>
 

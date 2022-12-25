@@ -17,22 +17,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
             <div class="flex justify-center items-center">
-            <div class="text-stone-500">{{ Auth::user()->name }}</div>
-        <a href='/posts/create' class="px-2 py-1 ml-2  rounded bg-blue-100 text-indigo-500 font-bold link-hover cursor-pointer">投稿する</a>    
+            <div class="text-stone-500 font-bold text-xl">  {{ $name }}</div>
+       
           </div>
           
           
            
-          <div class="my-4 flex font-semibold text-stone-500 justify-around items-center">
-        <a href='/tags/{{$tag_id}}'>最新順</a> <a href='/tags/{{$tag_id}}/likepage'>いいね順</a> <a href='/tags/{{$tag_id}}/referencepage'>参考順</a>
-       </div>
-       
-           <hr class="my-4">
-           <div class="my-4 text-stone-500">
-          <h2 class="px-2 py-1 ml-2 mb-4 inline-flex items-center border-b-2 border-emerald-400 font-bold text-2xl ">{{$tag_title}}</h2>
-         <h3 class="text-lg">{{$tag_body}}</h3>
-         </div>
          
+          
+          
           @foreach ($posts as $post)
           <hr class="my-4">
           <div class='bg-white rounded-md mt-1 mb-5 p-3'>

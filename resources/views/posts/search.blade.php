@@ -24,15 +24,10 @@
           
            
           <div class="my-4 flex font-semibold text-stone-500 justify-around items-center">
-        <a href='/tags/{{$tag_id}}'>最新順</a> <a href='/tags/{{$tag_id}}/likepage'>いいね順</a> <a href='/tags/{{$tag_id}}/referencepage'>参考順</a>
+        <a>検索結果</a>
        </div>
-       
-           <hr class="my-4">
-           <div class="my-4 text-stone-500">
-          <h2 class="px-2 py-1 ml-2 mb-4 inline-flex items-center border-b-2 border-emerald-400 font-bold text-2xl ">{{$tag_title}}</h2>
-         <h3 class="text-lg">{{$tag_body}}</h3>
-         </div>
-         
+          
+          
           @foreach ($posts as $post)
           <hr class="my-4">
           <div class='bg-white rounded-md mt-1 mb-5 p-3'>
@@ -53,7 +48,7 @@
               @foreach ($post->images as $image)
                  <input type="hidden" name="image[post_id]" value={{$post->id}}>
                  
-                 <img src="{{$image->image_path}}">
+                 <img  class="w-[762px]" src="{{$image->image_path}}">
              
                  
               @endforeach

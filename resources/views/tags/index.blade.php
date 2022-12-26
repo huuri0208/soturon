@@ -30,7 +30,7 @@
            <hr class="my-4">
            <div class="my-4 text-stone-500">
           <h2 class="px-2 py-1 ml-2 mb-4 inline-flex items-center border-b-2 border-emerald-400 font-bold text-2xl ">{{$tag_title}}</h2>
-         <h3 class="text-lg">{{$tag_body}}</h3>
+         <h3 class="text-lg">{!! nl2br(htmlspecialchars($tag_body)) !!}</h3>
          </div>
          
           @foreach ($posts as $post)

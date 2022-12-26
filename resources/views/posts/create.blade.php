@@ -22,7 +22,7 @@
         <form action="/posts" method="POST"  enctype="multipart/form-data">
             @csrf
             <div>
-        <h2 class="my-2 text-xl font-bold">タグ</h2>
+        <h2 class="my-2 text-xl font-bold">タグ（季節順）</h2>
         @foreach($tags as $tag)
 
             <label>
